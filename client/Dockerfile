@@ -26,7 +26,7 @@ COPY --from=build /app/build/ /usr/local/apache2/htdocs/
 # On expose le port 80 (par défaut pour Apache)
 EXPOSE 80
 
-ENV API_BASE_URL http://localhost:3000
+#ENV API_BASE_URL http://localhost:3000
 
 
 #CMD ["httpd", "-D", "FOREGROUND", "-D", "HTTPD_PORT=${APP_API_URL}}"]
