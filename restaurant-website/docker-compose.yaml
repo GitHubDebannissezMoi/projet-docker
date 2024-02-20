@@ -1,2 +1,19 @@
 # Définir cette configuration Compose afin de lancer l'application
 # Grilli en production.
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./private/grilli.com.conf:/etc/nginx/conf.d/grilli.com.conf
+      - ./public:/var/www/html/public
+  php:
+    image: php:8.3-fpm
+    build: .
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "9000:9000"
+
+    
