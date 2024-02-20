@@ -1,0 +1,24 @@
+# Définir cette configuration Compose afin de lancer l'application
+# Make Me Watch en production.
+version: '3'
+services:
+  # Service du serveur
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+
+  # Service du client
+  client:
+  # Configurations spécifiques au client
+   build:
+     context: ./client
+     dockerfile: Dockerfile-client
+   ports:
+     - "80:80"
+   volumes:
+     - ./client:/app
