@@ -5,20 +5,21 @@ services:
   # Service du serveur
   server:
     build:
-      context: .
+      context: ./server
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - API_BASE_URL=http://localhost:3000
 
   # Service du client
   client:
   # Configurations spécifiques au client
    build:
      context: ./client
-     dockerfile: Dockerfile-client
+     dockerfile: Dockerfile
    ports:
-     - "80:80"
-   volumes:
-     - ./client:/app
+     - "4173:4173"
+  
+   

@@ -1,16 +1,21 @@
 # Créer un Dockerfile pour cette application en mode production
 # Utilisation d'une image Apache avec PHP
-FROM php:apache
+FROM node:20 as build
 
-# Définition du répertoire de travail
-WORKDIR /var/www/html
+WORKDIR /usr/src/app
 
-# Copie des fichiers de l'application serveur dans le conteneur
+COPY package*.json ./
+
+RUN npm install -g npm@10.4.0
+
+RUN npm install
+
 COPY . .
 
-# On expose le port 80 (par défaut pour Apache)
+RUN apt-get update && \
+    apt-get install -y apache2
+
 EXPOSE 80
 
-# Commande pour démarrer le serveur Apache
-CMD ["apache2-foreground"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]
 
